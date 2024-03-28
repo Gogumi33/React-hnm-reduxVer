@@ -6,7 +6,7 @@ const ProductAll = () => {
   // json서버를 통한 db.json파일의 API 읽어오기.
   const [productList, setProductList] = useState([]);
   const getProducts = async() => {
-    let url = `https://my-json-server.typicode.com/Gogumi33/React-hnm-jsonAPI/products`
+    let url = `https://my-json-server.typicode.com/Gogumi33/React-h-m-shopping/products`
     let response = await fetch(url);
     let data = await response.json();
     
