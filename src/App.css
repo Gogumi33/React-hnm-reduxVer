@@ -17,9 +17,11 @@
   justify-content: flex-end;
   margin-top: 10px;
   margin-right: 45px;
+  cursor: pointer;
 }
 .login-text {
   margin-left: 5px;
+  cursor: pointer;
 }
 .nav-section {
   display: flex;
@@ -35,4 +37,38 @@
 .menu-area {
   display: flex;
   justify-content: center;
+}
+
+.card {
+  border: none !important;
+  margin-bottom: 15px;
+  border-radius: 2px;
+}
+.card:hover { /* 마우스 갖다 댈 시 스케일 1.1배 */
+  transform: scale(1.1);
+  z-index: 1;
+  cursor: pointer;
+}
+.new-product {
+  color: green;
+}
+
+/* 로그인 페이지 */
+.login-box {
+  display: flex;
+  justify-content: center;
+}
+.login-form {
+  width: 35em;
+  margin-top: 20px;
+}
+
+/* 상세 페이지 */
+.product-img {
+  display: flex;
+  justify-content: flex-end;
+}
+.product-info {
+  font-size: 20px;
+  font-weight: bold;
 }

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard';
+import { Container, Row, Col } from "react-bootstrap";
 
 const ProductAll = () => {
   // json서버를 통한 db.json파일의 API 읽어오기.
   const [productList, setProductList] = useState([]);
   const getProducts = async() => {
-    let url = `http://localhost:5000/products`
+    let url = `https://my-json-server.typicode.com/Gogumi33/React-hnm-jsonAPI/products`
     let response = await fetch(url);
     let data = await response.json();
     
@@ -18,7 +19,14 @@ const ProductAll = () => {
   }, [])
   return (
     <div>
-      <ProductCard />
+      {/* bootstrap container - 적당한 중앙에 배치하기 위함 (컨테이너 최대사이즈:12) */}
+      <Container>
+        <Row>
+          {productList.map((menu) => (
+            <Col lg={3}><ProductCard item={menu} /></Col>
+          ))}
+        </Row>
+      </Container>
     </div>
   )
 }

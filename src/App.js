@@ -1,10 +1,13 @@
 // import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from "react-router-dom";
 import ProductAll from "./pages/ProductAll";
 import Login from "./pages/Login";
 import ProductDetail from "./pages/ProductDetail";
 import Navbar from './components/Navbar';
+import PrivateRoute from './routes/PrivateRoute';
 
 // 프로젝트 시작 전 항상 스토리라인 먼저 적기.
 // 1. 총 페이지는 3개 - 전체상품 / 로그인 창 / 상세상품 @
@@ -17,15 +20,19 @@ import Navbar from './components/Navbar';
 // 7. 상품을 q= 을 통해 검색할 수 있다.
 
 function App() {
+  const [authenticate, setAuthenticate] = useState(false); // true여야 로그인 됨.
+  useEffect(() => {
+    // console.log("로그인 됬어", authenticate); // authenticate값이 바뀔 때 마다 감지.
+  }, [authenticate]);
   return (
     <div>
       <Navbar/>
 
       {/* Restful Route에 따른 url규칙 */}
       <Routes>
-        <Route path="/" element={<ProductAll/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/product/:id" element={<ProductDetail/>}/>
+        <Route path="/" element={<ProductAll/>} />
+        <Route path="/login" element={<Login setAuthenticate={setAuthenticate}/>} />
+        <Route path="/product/:id" element={<PrivateRoute authenticate={authenticate}/>} />
       </Routes>
     </div>
   );
