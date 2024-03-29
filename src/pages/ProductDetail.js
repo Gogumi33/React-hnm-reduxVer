@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button, Dropdown } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
 
 const ProductDetail = () => {
@@ -21,13 +21,28 @@ const ProductDetail = () => {
   return (
     <Container>
       <Row>
-        <Col className="product-img">
+        <Col xs={12} md={6} className="product-img">
           <img src={product?.img}/>
         </Col>
-        <Col className="product-info">
+        <Col xs={12} md={6} className="product-info">
           <div>{product?.title}</div>
           <div>₩{product?.price}</div>
           <div className="new-product">{product?.new == true? "신제품" : ""}</div>
+          
+          <Dropdown className="drop-down">
+            <Dropdown.Toggle variant="outline-dark" id="dropdown-basic" className="drop-down">
+              사이즈 선택
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {product?.size.length > 0 &&
+                product.size.map((item) => (
+                  <Dropdown.Item href="#/action-1">{item}</Dropdown.Item>
+                ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Button variant="secondary" className="add-button">
+            바로 주문하러 가기
+          </Button>
         </Col>
       </Row>
     </Container>

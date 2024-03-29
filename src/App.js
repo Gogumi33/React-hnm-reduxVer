@@ -1,4 +1,6 @@
-// import logo from './logo.svg';
+// json 서버 오픈 - npx json-server --watch db.json --port 5000
+
+// import logo from './logo.svg'
 import { useEffect, useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,7 +28,7 @@ function App() {
   }, [authenticate]);
   return (
     <div>
-      <Navbar/>
+      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate} />
 
       {/* Restful Route에 따른 url규칙 */}
       <Routes>
