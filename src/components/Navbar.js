@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 
+// ({authenticate, setAuthenticate}) 였음.
 const Navbar = ({authenticate, setAuthenticate}) => {
     const menuList = ['여성', '남성', '유아', '아동', '세일', '스포츠', '지속가능성',];
     let navigate = useNavigate();

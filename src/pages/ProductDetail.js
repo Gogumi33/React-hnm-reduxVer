@@ -1,18 +1,26 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Container, Row, Col, Button, Dropdown } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
+import { productAction } from '../redux/actions/productAction';
 
 const ProductDetail = () => {
   let {id} = useParams(); // parameter로 넘겨준 id값을 알 수 있음.
-  const[product, setProduct] = useState(null); // 여기에 api로부터 받아온 data 저장해둘거야.
+  // const[product, setProduct] = useState(null); // 여기에 api로부터 받아온 data 저장해둘거야.
+
+  // @@@ redux @@@
+  const product = useSelector((state) => state.product.selectedItem);
+  const dispatch = useDispatch();
 
   const getProductDetail = async() => {
-    let url = `https://my-json-server.typicode.com/Gogumi33/React-h-m-shopping/products/${id}`;
-    let response = await fetch(url);
-    let data = await response.json();
+    // let url = `https://my-json-server.typicode.com/Gogumi33/React-h-m-shopping/products/${id}`;
+    // let response = await fetch(url);
+    // let data = await response.json();
     // console.log(data);
-    setProduct(data);
+    //setProduct(data);
+
+    dispatch(productAction.getProductDetail(id));
   }
   useEffect(() => {
     getProductDetail();

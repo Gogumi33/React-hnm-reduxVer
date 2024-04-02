@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authenticateAction } from '../redux/actions/authenticateAction';
 
 // front-end에서는 아무 계정만 입력해도 로그인 했다고 가정.
 const Login = ({setAuthenticate}) => {
+  const [id, setId] = useState(''); // 아이디와 패스워드 읽어올거임.
+  const [password, setPassword] = useState('');
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // @@@ redux @@@
   const loginUser = (event) => {
     event.preventDefault(); // 자동 새로고침 방지 함수.
     // console.log("Hi");
-    setAuthenticate(true);
+
+    dispatch(authenticateAction.login(id, password)); // 미들웨어 함수
+
     navigate("/"); // 메인 홈페이지로 돌아가기(로그인 되었을 때)
   }
 
@@ -17,7 +27,7 @@ const Login = ({setAuthenticate}) => {
       <Form className="login-form" onSubmit={(event) => loginUser(event)}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control type="email" placeholder="Enter email" onChange={(event) => setId(event.target.value)} />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
@@ -25,7 +35,7 @@ const Login = ({setAuthenticate}) => {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />

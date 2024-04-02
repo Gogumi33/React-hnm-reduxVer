@@ -31,10 +31,11 @@ function App() {
       <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate} />
 
       {/* Restful Route에 따른 url규칙 */}
+      {/* redux 이용 시 props 건내줄 필요 없어짐 */}
       <Routes>
         <Route path="/" element={<ProductAll/>} />
-        <Route path="/login" element={<Login setAuthenticate={setAuthenticate}/>} />
-        <Route path="/product/:id" element={<PrivateRoute authenticate={authenticate}/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/product/:id" element={<PrivateRoute />} />
       </Routes>
     </div>
   );
