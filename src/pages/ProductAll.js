@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useSearchParams } from 'react-router-dom';
 import { productAction } from "../redux/actions/productAction";
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../redux/reducers/productSlice';
 
 const ProductAll = () => {
   // json서버를 통한 db.json파일의 API 읽어오기.
@@ -17,7 +18,7 @@ const ProductAll = () => {
     // 검색기능 구현.
     let searchQuery = query.get('q') || "";
     
-    dispatch(productAction.getProducts(searchQuery));
+    dispatch(fetchProducts(searchQuery));
     // 이렇게 해주면 바로 reducer가는게 아니라 미들웨어 거치고 가게된다.
 
     // @@@ redux @@@
