@@ -2,10 +2,19 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { Container, Row, Col, Button, Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { productAction } from '../redux/actions/productAction';
+import { fetchDetailProducts } from '../redux/reducers/productSlice';
 
 const ProductDetail = () => {
+  const [btnActive, setBtnActive] = useState(null);
+  const toggle = (event) => {
+    console.log("toggle",event.target.value)
+    setBtnActive(event.target.value);
+    console.log("btnActive", btnActive);
+    return event.target.value;
+  }
+
   let {id} = useParams(); // parameter로 넘겨준 id값을 알 수 있음.
   // const[product, setProduct] = useState(null); // 여기에 api로부터 받아온 data 저장해둘거야.
 
@@ -20,7 +29,8 @@ const ProductDetail = () => {
     // console.log(data);
     //setProduct(data);
 
-    dispatch(productAction.getProductDetail(id));
+    // dispatch(productAction.getProductDetail(id)); // 더 간단히 변경
+    dispatch(fetchDetailProducts(id));
   }
   useEffect(() => {
     getProductDetail();
